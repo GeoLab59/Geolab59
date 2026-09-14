@@ -1,2249 +1,1744 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ИП Шилоносов Леонид Андреевич — ГИС, БПЛА, геодезия, дендрология</title>
-
-<meta name="description" content="Инженерные и геоинформационные услуги. Дендрологические обследования, БПЛА, аэрофотосъёмка, геодезия, ГИС, картография, лесное хозяйство и дистанционное зондирование. Пермь и Россия.">
-<meta name="author" content="Шилоносов Леонид Андреевич">
-
-<meta property="og:title" content="Шилоносов Леонид Андреевич — GIS · UAV · GEO">
-<meta property="og:description" content="Инженерные и геоинформационные решения для территорий, строительства, лесного хозяйства и экологических проектов.">
-<meta property="og:type" content="website">
-
-<style>
-
-:root {
-    --bg: #080b0b;
-    --bg-soft: #0d1212;
-    --panel: #111817;
-    --panel-hover: #151d1c;
-    --text: #f2f5f1;
-    --muted: #899590;
-    --muted2: #65706c;
-    --line: rgba(255,255,255,.09);
-    --accent: #b9e66d;
-    --accent-dark: #89b84a;
-    --white-soft: #d9dfdb;
-    --max: 1240px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-    line-height: 1.5;
-    overflow-x: hidden;
-}
-
-body.menu-open {
-    overflow: hidden;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-}
-
-.container {
-    width: min(calc(100% - 48px), var(--max));
-    margin: 0 auto;
-}
-
-section {
-    padding: 120px 0;
-}
-
-::selection {
-    background: var(--accent);
-    color: #101510;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid transparent;
-    transition: .3s ease;
-}
-
-.header.scrolled {
-    background: rgba(8,11,11,.88);
-    border-color: var(--line);
-    backdrop-filter: blur(20px);
-}
-
-.nav {
-    height: 78px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.brand-mark {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(185,230,109,.45);
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -.05em;
-}
-
-.brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-.brand-name {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .02em;
-}
-
-.brand-sub {
-    color: var(--muted2);
-    font-size: 8px;
-    letter-spacing: .2em;
-    margin-top: 5px;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: #aeb8b4;
-    font-size: 12px;
-    transition: .25s;
-}
-
-.nav-links a:hover {
-    color: white;
-}
-
-.nav-contact {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 17px;
-    border: 1px solid rgba(185,230,109,.45);
-    border-radius: 7px;
-    color: var(--accent);
-    font-size: 12px;
-    transition: .25s;
-}
-
-.nav-contact:hover {
-    background: var(--accent);
-    color: #101510;
-}
-
-.menu-button {
-    display: none;
-    width: 42px;
-    height: 42px;
-    background: transparent;
-    border: 1px solid var(--line);
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.mobile-menu {
-    display: none;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 900px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--line);
-
-    background:
-        radial-gradient(
-            circle at 75% 40%,
-            rgba(130,175,70,.13),
-            transparent 31%
-        ),
-        linear-gradient(
-            180deg,
-            #080b0b 0%,
-            #090d0d 100%
-        );
-}
-
-.hero-grid {
-    position: absolute;
-    inset: 0;
-    opacity: .17;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.06) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.06) 1px,
-            transparent 1px
-        );
-
-    background-size: 80px 80px;
-
-    mask-image:
-        linear-gradient(
-            to right,
-            transparent,
-            black 35%,
-            black 75%,
-            transparent
-        );
-}
-
-.hero-orbit {
-    position: absolute;
-    right: -120px;
-    top: 100px;
-    width: 700px;
-    height: 700px;
-    border: 1px solid rgba(185,230,109,.11);
-    border-radius: 50%;
-}
-
-.hero-orbit::before,
-.hero-orbit::after {
-    content: "";
-    position: absolute;
-    border: 1px solid rgba(185,230,109,.08);
-    border-radius: 50%;
-}
-
-.hero-orbit::before {
-    inset: 80px;
-}
-
-.hero-orbit::after {
-    inset: 180px;
-}
-
-.hero-crosshair {
-    position: absolute;
-    right: 230px;
-    top: 390px;
-    width: 120px;
-    height: 120px;
-    border: 1px solid rgba(185,230,109,.32);
-    border-radius: 50%;
-}
-
-.hero-crosshair::before,
-.hero-crosshair::after {
-    content: "";
-    position: absolute;
-    background: rgba(185,230,109,.35);
-}
-
-.hero-crosshair::before {
-    height: 1px;
-    width: 170px;
-    left: -25px;
-    top: 59px;
-}
-
-.hero-crosshair::after {
-    width: 1px;
-    height: 170px;
-    top: -25px;
-    left: 59px;
-}
-
-.coord {
-    position: absolute;
-    color: rgba(185,230,109,.28);
-    font-size: 9px;
-    letter-spacing: .18em;
-}
-
-.coord.a {
-    right: 470px;
-    top: 190px;
-}
-
-.coord.b {
-    right: 90px;
-    bottom: 190px;
-}
-
-.coord.c {
-    left: 50px;
-    bottom: 60px;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-    padding-top: 80px;
-}
-
-.eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: .18em;
-    font-size: 10px;
-    margin-bottom: 26px;
-}
-
-.eyebrow::before {
-    content: "";
-    width: 30px;
-    height: 1px;
-    background: var(--accent);
-}
-
-.hero h1 {
-    font-size: clamp(54px, 7.5vw, 96px);
-    line-height: .93;
-    letter-spacing: -.07em;
-    font-weight: 700;
-}
-
-.hero h1 em {
-    color: var(--accent);
-    font-style: normal;
-}
-
-.hero-description {
-    max-width: 650px;
-    margin-top: 31px;
-    color: #a2ada8;
-    font-size: 16px;
-    line-height: 1.75;
-}
-
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 11px;
-    margin-top: 37px;
-}
-
-.btn {
-    min-height: 49px;
-    padding: 0 21px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 650;
-    transition: .25s;
-}
-
-.btn-primary {
-    background: var(--accent);
-    color: #10150d;
-}
-
-.btn-primary:hover {
-    background: #d0f68d;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    border: 1px solid var(--line);
-    color: #d8dedb;
-}
-
-.btn-secondary:hover {
-    background: rgba(255,255,255,.04);
-    border-color: rgba(185,230,109,.3);
-}
-
-.hero-bottom {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    margin-top: 70px;
-}
-
-.hero-stat strong {
-    display: block;
-    font-size: 19px;
-    letter-spacing: -.03em;
-}
-
-.hero-stat span {
-    display: block;
-    color: var(--muted2);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: .11em;
-    margin-top: 5px;
-}
-
-/* =========================
-   SECTION HEAD
-========================= */
-
-.section-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    align-items: flex-end;
-}
-
-.section-label {
-    color: var(--accent);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: .2em;
-    margin-bottom: 17px;
-}
-
-.section-title {
-    font-size: clamp(36px, 4.7vw, 61px);
-    line-height: 1;
-    letter-spacing: -.06em;
-    max-width: 800px;
-}
-
-.section-description {
-    max-width: 510px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.75;
-}
-
-/* =========================
-   SERVICES
-========================= */
-
-.services {
-    background: var(--bg-soft);
-    border-bottom: 1px solid var(--line);
-}
-
-.services-grid {
-    margin-top: 60px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-}
-
-.service {
-    position: relative;
-    min-height: 300px;
-    padding: 32px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    transition: .3s ease;
-    overflow: hidden;
-}
-
-.service::after {
-    content: "";
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    right: -55px;
-    bottom: -55px;
-    border: 1px solid rgba(185,230,109,.08);
-    border-radius: 50%;
-    transition: .4s;
-}
-
-.service:hover {
-    background: var(--panel-hover);
-}
-
-.service:hover::after {
-    transform: scale(1.5);
-}
-
-.service-number {
-    color: var(--muted2);
-    font-size: 10px;
-}
-
-.service-icon {
-    margin-top: 47px;
-    color: var(--accent);
-    font-size: 22px;
-}
-
-.service h3 {
-    margin-top: 15px;
-    font-size: 20px;
-    letter-spacing: -.035em;
-}
-
-.service p {
-    margin-top: 11px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.7;
-    max-width: 340px;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about {
-    background: var(--bg);
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: .95fr 1.05fr;
-    gap: 100px;
-    align-items: center;
-}
-
-.about-card {
-    position: relative;
-    min-height: 560px;
-    border: 1px solid var(--line);
-    overflow: hidden;
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(185,230,109,.09),
-            transparent 26%
-        ),
-        #0d1212;
-}
-
-.about-card-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 55px 55px;
-}
-
-.about-card-circle {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    border: 1px solid rgba(185,230,109,.23);
-    border-radius: 50%;
-}
-
-.about-card-circle::before,
-.about-card-circle::after {
-    content: "";
-    position: absolute;
-    border: 1px solid rgba(185,230,109,.1);
-    border-radius: 50%;
-}
-
-.about-card-circle::before {
-    inset: 45px;
-}
-
-.about-card-circle::after {
-    inset: 90px;
-}
-
-.about-card-cross {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 120px;
-    height: 120px;
-    transform: translate(-50%,-50%);
-}
-
-.about-card-cross::before,
-.about-card-cross::after {
-    content: "";
-    position: absolute;
-    background: rgba(185,230,109,.35);
-}
-
-.about-card-cross::before {
-    height: 1px;
-    width: 100%;
-    top: 50%;
-}
-
-.about-card-cross::after {
-    width: 1px;
-    height: 100%;
-    left: 50%;
-}
-
-.about-card-label {
-    position: absolute;
-    left: 25px;
-    top: 25px;
-    color: rgba(185,230,109,.3);
-    font-size: 9px;
-    letter-spacing: .2em;
-}
-
-.about-card-coord {
-    position: absolute;
-    right: 25px;
-    bottom: 25px;
-    color: var(--muted2);
-    font-size: 9px;
-}
-
-.about h2 {
-    font-size: clamp(37px,4.4vw,57px);
-    line-height: 1;
-    letter-spacing: -.06em;
-}
-
-.about-text p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-    margin-top: 22px;
-}
-
-.features {
-    margin-top: 32px;
-    display: grid;
-    gap: 12px;
-}
-
-.feature {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #c9d0cc;
-    font-size: 12px;
-}
-
-.feature-dot {
-    width: 20px;
-    height: 20px;
-    border: 1px solid rgba(185,230,109,.4);
-    border-radius: 50%;
-    color: var(--accent);
-    display: grid;
-    place-items: center;
-    font-size: 9px;
-}
-
-/* =========================
-   DIRECTIONS
-========================= */
-
-.directions {
-    background: var(--bg-soft);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-}
-
-.direction-list {
-    margin-top: 58px;
-    border-top: 1px solid var(--line);
-}
-
-.direction {
-    display: grid;
-    grid-template-columns: 70px 1fr 350px 30px;
-    gap: 25px;
-    align-items: center;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--line);
-    transition: .25s;
-}
-
-.direction:hover {
-    padding-left: 10px;
-}
-
-.direction-number {
-    color: var(--muted2);
-    font-size: 10px;
-}
-
-.direction-title {
-    font-size: 21px;
-    letter-spacing: -.035em;
-}
-
-.direction-description {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.direction-arrow {
-    color: var(--accent);
-    font-size: 17px;
-}
-
-/* =========================
-   PROJECTS
-========================= */
-
-.projects {
-    background: var(--bg);
-}
-
-.projects-grid {
-    margin-top: 58px;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 16px;
-}
-
-.project {
-    min-height: 330px;
-    position: relative;
-    border: 1px solid var(--line);
-    overflow: hidden;
-    background: #0d1212;
-}
-
-.project.large {
-    grid-row: span 2;
-    min-height: 676px;
-}
-
-.project-art {
-    position: absolute;
-    inset: 0;
-    transition: transform .7s ease;
-}
-
-.project:hover .project-art {
-    transform: scale(1.04);
-}
-
-.project-art.one {
-    background:
-        radial-gradient(
-            circle at 60% 40%,
-            rgba(185,230,109,.22),
-            transparent 24%
-        ),
-        repeating-linear-gradient(
-            35deg,
-            transparent 0 25px,
-            rgba(255,255,255,.035) 26px 27px
-        ),
-        #0c1211;
-}
-
-.project-art.two {
-    background:
-        radial-gradient(
-            circle at 70% 30%,
-            rgba(185,230,109,.16),
-            transparent 25%
-        ),
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.04),
-            transparent 55%
-        ),
-        #101616;
-}
-
-.project-art.three {
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0 35px,
-            rgba(255,255,255,.025) 36px 37px
-        ),
-        radial-gradient(
-            circle at 30% 60%,
-            rgba(185,230,109,.14),
-            transparent 25%
-        ),
-        #0e1413;
-}
-
-.project-info {
-    position: absolute;
-    z-index: 2;
-    left: 29px;
-    right: 29px;
-    bottom: 27px;
-}
-
-.project-type {
-    color: var(--accent);
-    font-size: 8px;
-    letter-spacing: .18em;
-}
-
-.project-title {
-    margin-top: 8px;
-    font-size: 24px;
-    line-height: 1.1;
-    letter-spacing: -.045em;
-}
-
-.project-description {
-    color: #909b96;
-    font-size: 11px;
-    margin-top: 8px;
-    max-width: 460px;
-}
-
-/* =========================
-   PROCESS
-========================= */
-
-.process {
-    background: var(--bg-soft);
-    border-top: 1px solid var(--line);
-}
-
-.process-grid {
-    margin-top: 58px;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    border-top: 1px solid var(--line);
-}
-
-.process-item {
-    padding: 27px 24px 0 0;
-    border-right: 1px solid var(--line);
-    margin-right: 24px;
-}
-
-.process-item:last-child {
-    border-right: 0;
-}
-
-.process-num {
-    color: var(--accent);
-    font-size: 10px;
-}
-
-.process-item h3 {
-    margin-top: 52px;
-    font-size: 18px;
-    letter-spacing: -.03em;
-}
-
-.process-item p {
-    color: var(--muted);
-    font-size: 11px;
-    line-height: 1.7;
-    margin-top: 10px;
-}
-
-/* =========================
-   CTA
-========================= */
-
-.cta {
-    padding: 105px 0;
-    background:
-        radial-gradient(
-            circle at 75% 50%,
-            rgba(185,230,109,.13),
-            transparent 30%
-        ),
-        #0a0f0f;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-}
-
-.cta-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-}
-
-.cta h2 {
-    font-size: clamp(40px,5.2vw,68px);
-    line-height: .98;
-    letter-spacing: -.065em;
-}
-
-.cta p {
-    margin-top: 17px;
-    color: var(--muted);
-    font-size: 13px;
-}
-
-/* =========================
-   CONTACTS
-========================= */
-
-.contacts {
-    background: var(--bg);
-}
-
-.contacts-grid {
-    margin-top: 58px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 90px;
-}
-
-.contact-row {
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.contact-label {
-    color: var(--muted2);
-    font-size: 8px;
-    text-transform: uppercase;
-    letter-spacing: .17em;
-    margin-bottom: 8px;
-}
-
-.contact-value {
-    font-size: 16px;
-}
-
-.contact-value a {
-    transition: .2s;
-}
-
-.contact-value a:hover {
-    color: var(--accent);
-}
-
-.requisites {
-    padding: 31px;
-    border: 1px solid var(--line);
-    background: #0d1212;
-}
-
-.requisites-title {
-    font-size: 18px;
-    margin-bottom: 21px;
-}
-
-.req-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 11px;
-}
-
-.req-row:last-child {
-    border-bottom: 0;
-}
-
-.req-row span:first-child {
-    color: var(--muted2);
-}
-
-.req-row span:last-child {
-    text-align: right;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-    color: var(--muted2);
-    font-size: 9px;
-}
-
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-/* =========================
-   REVEAL
-========================= */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition:
-        opacity .75s ease,
-        transform .75s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 950px) {
-
-    .nav-links,
-    .nav-contact {
-        display: none;
-    }
-
-    .menu-button {
-        display: grid;
-        place-items: center;
-    }
-
-    .mobile-menu {
-        position: fixed;
-        z-index: 999;
-        inset: 78px 0 0;
-        background: rgba(8,11,11,.98);
-        padding: 35px 24px;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        transform: translateX(100%);
-        transition: .35s ease;
-    }
-
-    .mobile-menu.open {
-        transform: translateX(0);
-    }
-
-    .mobile-menu a {
-        padding: 20px 0;
-        border-bottom: 1px solid var(--line);
-        font-size: 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 55px;
-    }
-
-    .direction {
-        grid-template-columns: 55px 1fr 260px 25px;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project.large {
-        grid-row: auto;
-        min-height: 500px;
-    }
-
-    .process-grid {
-        grid-template-columns: repeat(2,1fr);
-        gap: 25px;
-    }
-
-    .process-item {
-        border-right: 0;
-        margin-right: 0;
-        padding-right: 0;
-    }
-
-    .contacts-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-}
-
-@media (max-width: 620px) {
-
-    .container {
-        width: min(calc(100% - 32px), var(--max));
-    }
-
-    section {
-        padding: 80px 0;
-    }
-
-    .nav {
-        height: 68px;
-    }
-
-    .mobile-menu {
-        inset: 68px 0 0;
-    }
-
-    .hero {
-        min-height: 820px;
-    }
-
-    .hero-content {
-        padding-top: 60px;
-    }
-
-    .hero h1 {
-        font-size: 51px;
-    }
-
-    .hero-description {
-        font-size: 14px;
-    }
-
-    .hero-bottom {
-        gap: 25px;
-        flex-wrap: wrap;
-        margin-top: 50px;
-    }
-
-    .hero-orbit {
-        right: -370px;
-        top: 160px;
-        opacity: .55;
-    }
-
-    .hero-crosshair {
-        right: 70px;
-        top: 470px;
-        transform: scale(.7);
-    }
-
-    .coord {
-        display: none;
-    }
-
-    .section-top {
-        display: block;
-    }
-
-    .section-description {
-        margin-top: 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .service {
-        min-height: 260px;
-    }
-
-    .about-card {
-        min-height: 390px;
-    }
-
-    .direction {
-        grid-template-columns: 38px 1fr 20px;
-        gap: 12px;
-    }
-
-    .direction-description {
-        margin-top: 4px;
-    }
-
-    .direction-arrow {
-        text-align: right;
-    }
-
-    .project {
-        min-height: 310px;
-    }
-
-    .project.large {
-        min-height: 420px;
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .process-item {
-        border-top: 1px solid var(--line);
-        padding-top: 20px;
-    }
-
-    .process-item h3 {
-        margin-top: 30px;
-    }
-
-    .cta {
-        padding: 80px 0;
-    }
-
-    .cta-inner {
-        display: block;
-    }
-
-    .cta .btn {
-        margin-top: 30px;
-    }
-
-    .req-row {
-        display: block;
-    }
-
-    .req-row span:last-child {
-        display: block;
-        margin-top: 5px;
-        text-align: left;
-    }
-
-    .footer-inner {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Лаборатория геоинформационных технологий и фотограмметрии</title>
+
+    <meta name="description"
+          content="Геоинформационные технологии, фотограмметрия, БПЛА, ДЗЗ, геодезия, картография, дендрологические и лесные обследования.">
+
+    <meta name="keywords"
+          content="ГИС, фотограмметрия, БПЛА, аэрофотосъемка, ДЗЗ, геодезия, картография, дендрология, лесное хозяйство, Пермь">
+
+    <meta name="author" content="Шилоносов Леонид Андреевич">
+
+    <meta property="og:title"
+          content="Лаборатория геоинформационных технологий и фотограмметрии">
+
+    <meta property="og:description"
+          content="ГИС • БПЛА • Фотограмметрия • ДЗЗ • Геодезия • Пространственный анализ">
+
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #071014;
+            --bg2: #0b171d;
+            --card: rgba(17, 31, 38, 0.72);
+            --card-solid: #102027;
+            --text: #eef5f6;
+            --muted: #92a5ab;
+            --line: rgba(255,255,255,.09);
+            --accent: #72e0b1;
+            --accent-dark: #163b31;
+            --white: #ffffff;
+            --max: 1220px;
+            --radius: 22px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at 85% 15%, rgba(114,224,177,.08), transparent 28%),
+                radial-gradient(circle at 15% 65%, rgba(75,145,255,.06), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid transparent;
+            transition: .3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(7,16,20,.88);
+            backdrop-filter: blur(18px);
+            border-bottom-color: var(--line);
+        }
+
+        .nav {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            max-width: 500px;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(114,224,177,.5);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            background: rgba(114,224,177,.05);
+        }
+
+        .brand-mark::before {
+            content: "";
+            width: 13px;
+            height: 13px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(114,224,177,.08);
+        }
+
+        .brand-text {
+            font-size: 13px;
+            line-height: 1.3;
+            font-weight: 700;
+            letter-spacing: .01em;
+        }
+
+        .brand-sub {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #b6c2c6;
+            font-size: 13px;
+            font-weight: 500;
+            transition: .2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-contact {
+            border: 1px solid var(--line);
+            padding: 10px 16px;
+            border-radius: 999px;
+            transition: .2s ease;
+        }
+
+        .nav-contact:hover {
+            border-color: rgba(114,224,177,.5);
+            background: rgba(114,224,177,.06);
+        }
+
+        .menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--line);
+            background: transparent;
+            border-radius: 11px;
+            cursor: pointer;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 19px;
+            height: 2px;
+            background: var(--text);
+            margin: 4px auto;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 160px 0 100px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: .16em;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            font-size: clamp(44px, 6vw, 82px);
+            line-height: .98;
+            letter-spacing: -.055em;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            max-width: 690px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 52px;
+            padding: 0 22px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            font-size: 13px;
+            font-weight: 700;
+            transition: .25s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #07140f;
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(114,224,177,.18);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,.04);
+            border-color: rgba(255,255,255,.18);
+        }
+
+        .hero-note {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            margin-top: 28px;
+            color: #789096;
+            font-size: 12px;
+        }
+
+        .hero-note::before {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        /* HERO VISUAL */
+
+        .hero-visual {
+            position: relative;
+            min-height: 470px;
+        }
+
+        .map-card {
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            overflow: hidden;
+            background:
+                linear-gradient(rgba(114,224,177,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(114,224,177,.05) 1px, transparent 1px),
+                linear-gradient(145deg,#0d1d23,#081318);
+            background-size: 42px 42px,42px 42px,auto;
+            box-shadow: 0 30px 70px rgba(0,0,0,.35);
+        }
+
+        .map-card::before {
+            content: "";
+            position: absolute;
+            inset: 14%;
+            border: 1px solid rgba(114,224,177,.25);
+            transform: rotate(-12deg) skewX(-12deg);
+            border-radius: 18px;
+        }
+
+        .map-card::after {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 1px solid rgba(114,224,177,.25);
+            top: 30%;
+            left: 33%;
+            box-shadow:
+                0 0 0 38px rgba(114,224,177,.025),
+                0 0 0 76px rgba(114,224,177,.02);
+        }
+
+        .map-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 8px rgba(114,224,177,.1);
+        }
+
+        .point-1 { top: 28%; left: 26%; }
+        .point-2 { top: 52%; left: 63%; }
+        .point-3 { top: 70%; left: 41%; }
+
+        .visual-label {
+            position: absolute;
+            bottom: 22px;
+            left: 22px;
+            right: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            background: rgba(5,12,15,.72);
+            backdrop-filter: blur(15px);
+            border-radius: 14px;
+            font-size: 11px;
+            color: #9aabae;
+        }
+
+        .visual-label strong {
+            color: var(--text);
+        }
+
+        /* ================= SECTIONS ================= */
+
+        section {
+            padding: 110px 0;
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        .section-head {
+            max-width: 820px;
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: clamp(34px,4vw,54px);
+            line-height: 1.05;
+            letter-spacing: -.04em;
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 720px;
+        }
+
+        /* ================= SERVICES ================= */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .service {
+            min-height: 280px;
+            padding: 28px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            transition: .3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service:hover {
+            transform: translateY(-5px);
+            border-color: rgba(114,224,177,.25);
+            background: rgba(18,36,42,.85);
+        }
+
+        .service-index {
+            color: #63767c;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 35px;
+        }
+
+        .service h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .service p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: auto;
+        }
+
+        .service-tag {
+            display: inline-flex;
+            align-self: flex-start;
+            margin-top: 24px;
+            padding: 6px 9px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 10px;
+            color: #83969a;
+        }
+
+        /* ================= DATA BAND ================= */
+
+        .data-band {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: rgba(255,255,255,.02);
+        }
+
+        .data-item {
+            padding: 30px;
+            border-right: 1px solid var(--line);
+        }
+
+        .data-item:last-child {
+            border-right: 0;
+        }
+
+        .data-value {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -.04em;
+            margin-bottom: 8px;
+        }
+
+        .data-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .about-card {
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 30px;
+            background: linear-gradient(145deg,rgba(114,224,177,.05),rgba(255,255,255,.015));
+        }
+
+        .about-card-title {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .about-card h3 {
+            font-size: 28px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .about-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .about-list div {
+            display: flex;
+            gap: 12px;
+            color: #b8c4c7;
+            font-size: 13px;
+        }
+
+        .about-list div::before {
+            content: "↗";
+            color: var(--accent);
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        /* ================= DIRECTIONS ================= */
+
+        .direction-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 15px;
+        }
+
+        .direction {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            padding: 25px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(255,255,255,.015);
+        }
+
+        .direction-num {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .direction h3 {
+            margin-bottom: 8px;
+            font-size: 17px;
+        }
+
+        .direction p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= WORK ================= */
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1.4fr .6fr;
+            gap: 15px;
+        }
+
+        .work-card {
+            min-height: 320px;
+            padding: 30px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(114,224,177,.10), transparent 30%),
+                #0d1b21;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card.small {
+            min-height: 320px;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(114,224,177,.07), transparent 35%),
+                #0d1b21;
+        }
+
+        .work-type {
+            color: var(--accent);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            margin-bottom: 20px;
+        }
+
+        .work-card h3 {
+            font-size: 25px;
+            max-width: 600px;
+            line-height: 1.15;
+        }
+
+        .work-card p {
+            position: absolute;
+            left: 30px;
+            right: 30px;
+            bottom: 28px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= STACK ================= */
+
+        .stack-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stack-item {
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: #adbdc0;
+            font-size: 12px;
+            background: rgba(255,255,255,.02);
+        }
+
+        /* ================= PROCESS ================= */
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            overflow: hidden;
+        }
+
+        .process {
+            padding: 28px;
+            border-right: 1px solid var(--line);
+        }
+
+        .process:last-child {
+            border-right: 0;
+        }
+
+        .process-num {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 28px;
+        }
+
+        .process h3 {
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .process p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* ================= FAQ ================= */
+
+        .faq {
+            max-width: 900px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+        }
+
+        summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 21px 0;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        details p {
+            color: var(--muted);
+            font-size: 13px;
+            padding: 0 50px 20px 0;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact-box {
+            padding: 55px;
+            border-radius: 28px;
+            border: 1px solid rgba(114,224,177,.18);
+            background:
+                radial-gradient(circle at 90% 10%, rgba(114,224,177,.10), transparent 30%),
+                linear-gradient(145deg,#0d1f25,#081318);
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-box h2 {
+            font-size: clamp(34px,4vw,56px);
+            line-height: 1.05;
+            letter-spacing: -.04em;
+            margin-bottom: 18px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-link {
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(255,255,255,.025);
+            transition: .2s ease;
+            font-size: 13px;
+        }
+
+        .contact-link:hover {
+            border-color: rgba(114,224,177,.3);
+            background: rgba(114,224,177,.05);
+        }
+
+        .contact-link span {
+            display: block;
+            font-size: 10px;
+            color: #697b80;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 4px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 45px 0 30px;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-main {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-name {
+            max-width: 550px;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .footer-sub {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .footer-legal {
+            text-align: right;
+            color: #637479;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            color: #4f6166;
+            font-size: 10px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 1000px) {
+            .hero-grid,
+            .about-grid,
+            .work-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .direction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .process:nth-child(2) {
+                border-right: 0;
+            }
+
+            .process:nth-child(-n+2) {
+                border-bottom: 1px solid var(--line);
+            }
+
+            .data-band {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .data-item:nth-child(2) {
+                border-right: 0;
+            }
+
+            .data-item:nth-child(-n+2) {
+                border-bottom: 1px solid var(--line);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                width: min(100% - 28px, var(--max));
+            }
+
+            .nav {
+                height: 68px;
+            }
+
+            .brand-text {
+                font-size: 11px;
+                max-width: 220px;
+            }
+
+            .brand-sub {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                inset: 68px 0 0;
+                background: rgba(7,16,20,.97);
+                backdrop-filter: blur(20px);
+                padding: 30px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 120px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-visual {
+                min-height: 330px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service {
+                min-height: 240px;
+            }
+
+            .data-band {
+                grid-template-columns: 1fr;
+            }
+
+            .data-item {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .data-item:last-child {
+                border-bottom: 0;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .process:last-child {
+                border-bottom: 0;
+            }
+
+            .contact-box {
+                padding: 30px;
+            }
+
+            .footer-main {
+                flex-direction: column;
+            }
+
+            .footer-legal {
+                text-align: left;
+            }
+        }
+
+        /* ================= ANIMATION ================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="header" id="header">
-
+<header id="header">
     <div class="container nav">
 
         <a href="#top" class="brand">
-
-            <div class="brand-mark">
-                LS
-            </div>
-
-            <div class="brand-text">
-
-                <span class="brand-name">
-                    ШИЛОНОСОВ
-                </span>
-
+            <div class="brand-mark"></div>
+            <div>
+                <div class="brand-text">
+                    Лаборатория геоинформационных технологий и фотограмметрии
+                </div>
                 <span class="brand-sub">
-                    GIS · UAV · GEO
+                    GIS • UAV • PHOTOGRAMMETRY • REMOTE SENSING
                 </span>
-
             </div>
-
         </a>
 
-
-        <nav class="nav-links">
-
+        <nav class="nav-links" id="navLinks">
             <a href="#services">Услуги</a>
-            <a href="#about">О специалисте</a>
-            <a href="#directions">Направления</a>
+            <a href="#about">О лаборатории</a>
             <a href="#projects">Проекты</a>
-            <a href="#contacts">Контакты</a>
-
+            <a href="#technology">Технологии</a>
+            <a href="#contacts" class="nav-contact">Связаться</a>
         </nav>
 
-
-        <a href="#contacts" class="nav-contact">
-            Обсудить задачу →
-        </a>
-
-
-        <button class="menu-button" id="menuButton" aria-label="Открыть меню">
-            ☰
+        <button class="menu-btn" id="menuBtn" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
 
     </div>
-
 </header>
-
-
-<!-- MOBILE MENU -->
-
-<nav class="mobile-menu" id="mobileMenu">
-
-    <a href="#services">Услуги</a>
-    <a href="#about">О специалисте</a>
-    <a href="#directions">Направления</a>
-    <a href="#projects">Проекты</a>
-    <a href="#contacts">Контакты</a>
-
-</nav>
 
 
 <main id="top">
 
+    <!-- HERO -->
 
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <div class="hero-grid"></div>
-
-    <div class="hero-orbit"></div>
-
-    <div class="hero-crosshair"></div>
-
-    <div class="coord a">
-        58°00′ N · 56°19′ E
-    </div>
-
-    <div class="coord b">
-        GIS / UAV / 2026
-    </div>
-
-    <div class="coord c">
-        SPATIAL DATA SYSTEMS
-    </div>
-
-
-    <div class="container">
-
-        <div class="hero-content reveal">
-
-            <div class="eyebrow">
-                Инженерные и геоинформационные решения
-            </div>
-
-
-            <h1>
-                Работаю<br>
-                с <em>территориями</em><br>
-                и данными.
-            </h1>
-
-
-            <p class="hero-description">
-                ГИС, БПЛА, геодезия, дендрология, картография
-                и дистанционное зондирование. От полевых
-                измерений до готового цифрового результата.
-            </p>
-
-
-            <div class="hero-actions">
-
-                <a href="#contacts" class="btn btn-primary">
-                    Обсудить задачу
-                    <span>→</span>
-                </a>
-
-                <a href="#services" class="btn btn-secondary">
-                    Смотреть услуги
-                </a>
-
-            </div>
-
-
-            <div class="hero-bottom">
-
-                <div class="hero-stat">
-                    <strong>GIS</strong>
-                    <span>пространственный анализ</span>
-                </div>
-
-                <div class="hero-stat">
-                    <strong>UAV</strong>
-                    <span>аэрофотосъёмка</span>
-                </div>
-
-                <div class="hero-stat">
-                    <strong>GEO</strong>
-                    <span>геодезия</span>
-                </div>
-
-                <div class="hero-stat">
-                    <strong>RS</strong>
-                    <span>дистанционное зондирование</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     SERVICES
-========================= -->
-
-<section class="services" id="services">
-
-    <div class="container">
-
-        <div class="section-top reveal">
-
-            <div>
-
-                <div class="section-label">
-                    01 / Услуги
-                </div>
-
-                <h2 class="section-title">
-                    Решения для задач,
-                    где важны данные
-                </h2>
-
-            </div>
-
-            <p class="section-description">
-                Выполнение инженерных, геодезических,
-                картографических и экологических задач
-                с использованием современных методов
-                сбора и анализа пространственной информации.
-            </p>
-
-        </div>
-
-
-        <div class="services-grid">
-
-
-            <article class="service reveal">
-
-                <div class="service-number">01</div>
-
-                <div class="service-icon">⌖</div>
-
-                <h3>
-                    Дендрологические обследования
-                </h3>
-
-                <p>
-                    Инвентаризация зелёных насаждений,
-                    оценка состояния деревьев, таксация,
-                    ведомости, схемы и картографические материалы.
-                </p>
-
-            </article>
-
-
-            <article class="service reveal">
-
-                <div class="service-number">02</div>
-
-                <div class="service-icon">◈</div>
-
-                <h3>
-                    БПЛА и аэрофотосъёмка
-                </h3>
-
-                <p>
-                    Аэрофотосъёмка территорий, ортофотопланы,
-                    цифровые модели рельефа и местности,
-                    фотограмметрия и 3D-моделирование.
-                </p>
-
-            </article>
-
-
-            <article class="service reveal">
-
-                <div class="service-number">03</div>
-
-                <div class="service-icon">⌁</div>
-
-                <h3>
-                    Геодезия
-                </h3>
-
-                <p>
-                    GNSS-измерения, планово-высотная привязка,
-                    съёмка объектов, исполнительные материалы
-                    и подготовка данных для проектирования.
-                </p>
-
-            </article>
-
-
-            <article class="service reveal">
-
-                <div class="service-number">04</div>
-
-                <div class="service-icon">▦</div>
-
-                <h3>
-                    ГИС и картография
-                </h3>
-
-                <p>
-                    Цифровые карты, базы геоданных,
-                    пространственный анализ, тематическое
-                    картографирование и автоматизация обработки.
-                </p>
-
-            </article>
-
-
-            <article class="service reveal">
-
-                <div class="service-number">05</div>
-
-                <div class="service-icon">△</div>
-
-                <h3>
-                    Лесное хозяйство
-                </h3>
-
-                <p>
-                    Геоинформационное сопровождение
-                    лесохозяйственных задач, картография,
-                    анализ территорий и работа с лесными данными.
-                </p>
-
-            </article>
-
-
-            <article class="service reveal">
-
-                <div class="service-number">06</div>
-
-                <div class="service-icon">◌</div>
-
-                <h3>
-                    Дистанционное зондирование
-                </h3>
-
-                <p>
-                    Анализ спутниковых и мультиспектральных данных,
-                    растительные индексы, мониторинг территорий
-                    и выявление пространственных изменений.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     ABOUT
-========================= -->
-
-<section class="about" id="about">
-
-    <div class="container about-grid">
-
-
-        <div class="about-card reveal">
-
-            <div class="about-card-grid"></div>
-
-            <div class="about-card-label">
-                SPATIAL DATA / 001
-            </div>
-
-            <div class="about-card-circle"></div>
-
-            <div class="about-card-cross"></div>
-
-            <div class="about-card-coord">
-                UAV · GIS · GNSS · RS
-            </div>
-
-        </div>
-
-
-        <div class="about-text reveal">
-
-            <div class="section-label">
-                02 / О специалисте
-            </div>
-
-            <h2>
-                Инженерный подход
-                к пространственным данным
-            </h2>
-
-            <p>
-                Шилоносов Леонид Андреевич —
-                инженер-картограф, геодезист и специалист
-                по геоинформационным технологиям.
-            </p>
-
-            <p>
-                В работе объединяются полевые измерения,
-                БПЛА, фотограмметрия, спутниковые данные,
-                ГИС и автоматизированная обработка
-                пространственной информации.
-            </p>
-
-
-            <div class="features">
-
-                <div class="feature">
-                    <span class="feature-dot">✓</span>
-                    От полевых работ до готового результата
-                </div>
-
-                <div class="feature">
-                    <span class="feature-dot">✓</span>
-                    Современные ГИС и методы ДЗЗ
-                </div>
-
-                <div class="feature">
-                    <span class="feature-dot">✓</span>
-                    Цифровые картографические материалы
-                </div>
-
-                <div class="feature">
-                    <span class="feature-dot">✓</span>
-                    Работа с пространственными базами данных
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     DIRECTIONS
-========================= -->
-
-<section class="directions" id="directions">
-
-    <div class="container">
-
-        <div class="section-top reveal">
-
-            <div>
-
-                <div class="section-label">
-                    03 / Направления
-                </div>
-
-                <h2 class="section-title">
-                    От отдельной
-                    съёмки до комплексной задачи
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="direction-list">
-
-
-            <div class="direction reveal">
-
-                <div class="direction-number">
-                    01
-                </div>
-
-                <div>
-                    <div class="direction-title">
-                        Зелёные насаждения
-                    </div>
-                </div>
-
-                <div class="direction-description">
-                    Дендрология · инвентаризация · обследование · ГИС
-                </div>
-
-                <div class="direction-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-            <div class="direction reveal">
-
-                <div class="direction-number">
-                    02
-                </div>
-
-                <div>
-                    <div class="direction-title">
-                        Аэрофотосъёмка
-                    </div>
-                </div>
-
-                <div class="direction-description">
-                    БПЛА · ортофотопланы · ЦМР · ЦММ · фотограмметрия
-                </div>
-
-                <div class="direction-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-            <div class="direction reveal">
-
-                <div class="direction-number">
-                    03
-                </div>
-
-                <div>
-                    <div class="direction-title">
-                        Лесное хозяйство
-                    </div>
-                </div>
-
-                <div class="direction-description">
-                    Лесные данные · картография · пространственный анализ
-                </div>
-
-                <div class="direction-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-            <div class="direction reveal">
-
-                <div class="direction-number">
-                    04
-                </div>
-
-                <div>
-                    <div class="direction-title">
-                        Геодезия и картография
-                    </div>
-                </div>
-
-                <div class="direction-description">
-                    GNSS · съёмка · координаты · цифровые планы
-                </div>
-
-                <div class="direction-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-            <div class="direction reveal">
-
-                <div class="direction-number">
-                    05
-                </div>
-
-                <div>
-                    <div class="direction-title">
-                        Экологический мониторинг
-                    </div>
-                </div>
-
-                <div class="direction-description">
-                    ДЗЗ · спутниковые данные · спектральный анализ
-                </div>
-
-                <div class="direction-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PROJECTS
-========================= -->
-
-<section class="projects" id="projects">
-
-    <div class="container">
-
-        <div class="section-top reveal">
-
-            <div>
-
-                <div class="section-label">
-                    04 / Портфолио
-                </div>
-
-                <h2 class="section-title">
-                    Проекты и
-                    практические задачи
-                </h2>
-
-            </div>
-
-            <p class="section-description">
-                Здесь будут размещены реальные выполненные
-                проекты, фотографии, карты, ортофотопланы
-                и результаты обследований.
-            </p>
-
-        </div>
-
-
-        <div class="projects-grid">
-
-
-            <article class="project large reveal">
-
-                <div class="project-art one"></div>
-
-                <div class="project-info">
-
-                    <div class="project-type">
-                        UAV / PHOTOGRAMMETRY
-                    </div>
-
-                    <div class="project-title">
-                        Создание ортофотопланов
-                    </div>
-
-                    <div class="project-description">
-                        Аэрофотосъёмка территории и подготовка
-                        точных цифровых картографических материалов.
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="project reveal">
-
-                <div class="project-art two"></div>
-
-                <div class="project-info">
-
-                    <div class="project-type">
-                        DENDROLOGY
-                    </div>
-
-                    <div class="project-title">
-                        Дендрологические обследования
-                    </div>
-
-                    <div class="project-description">
-                        Инвентаризация, обследование и оценка
-                        состояния зелёных насаждений.
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="project reveal">
-
-                <div class="project-art three"></div>
-
-                <div class="project-info">
-
-                    <div class="project-type">
-                        GIS / FORESTRY
-                    </div>
-
-                    <div class="project-title">
-                        Геоинформационные проекты
-                    </div>
-
-                    <div class="project-description">
-                        Пространственные базы данных,
-                        тематические карты и аналитика.
-                    </div>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PROCESS
-========================= -->
-
-<section class="process">
-
-    <div class="container">
-
-        <div class="section-top reveal">
-
-            <div>
-
-                <div class="section-label">
-                    05 / Как работаем
-                </div>
-
-                <h2 class="section-title">
-                    Четыре этапа
-                    от задачи до результата
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="process-grid">
-
-
-            <div class="process-item reveal">
-
-                <div class="process-num">
-                    01
-                </div>
-
-                <h3>
-                    Задача
-                </h3>
-
-                <p>
-                    Изучаем исходные данные, территорию,
-                    требования и конечный результат.
-                </p>
-
-            </div>
-
-
-            <div class="process-item reveal">
-
-                <div class="process-num">
-                    02
-                </div>
-
-                <h3>
-                    Полевые работы
-                </h3>
-
-                <p>
-                    Выполняем необходимые измерения,
-                    обследования и аэрофотосъёмку.
-                </p>
-
-            </div>
-
-
-            <div class="process-item reveal">
-
-                <div class="process-num">
-                    03
-                </div>
-
-                <h3>
-                    Обработка
-                </h3>
-
-                <p>
-                    Обрабатываем геоданные, строим модели,
-                    карты и выполняем пространственный анализ.
-                </p>
-
-            </div>
-
-
-            <div class="process-item reveal">
-
-                <div class="process-num">
-                    04
-                </div>
-
-                <h3>
-                    Результат
-                </h3>
-
-                <p>
-                    Передаём готовые материалы
-                    в согласованном формате и объёме.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CTA
-========================= -->
-
-<section class="cta">
-
-    <div class="container cta-inner reveal">
-
-        <div>
-
-            <h2>
-                Есть территория<br>
-                или задача?
-            </h2>
-
-            <p>
-                Опишите задачу — обсудим возможный способ решения.
-            </p>
-
-        </div>
-
-
-        <a href="#contacts" class="btn btn-primary">
-            Связаться →
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CONTACTS
-========================= -->
-
-<section class="contacts" id="contacts">
-
-    <div class="container">
-
-        <div class="section-top reveal">
-
-            <div>
-
-                <div class="section-label">
-                    06 / Контакты
-                </div>
-
-                <h2 class="section-title">
-                    Обсудим вашу задачу
-                </h2>
-
-            </div>
-
-            <p class="section-description">
-                Для предварительного расчёта достаточно
-                описать задачу, территорию и желаемый результат.
-            </p>
-
-        </div>
-
-
-        <div class="contacts-grid">
-
+    <section class="hero">
+        <div class="container hero-grid">
 
             <div class="reveal">
 
-                <div class="contact-row">
-
-                    <div class="contact-label">
-                        Предприниматель
-                    </div>
-
-                    <div class="contact-value">
-                        ИП Шилоносов Леонид Андреевич
-                    </div>
-
+                <div class="eyebrow">
+                    Инженерные и геоинформационные решения
                 </div>
 
+                <h1>
+                    Данные о территории
+                    <span>в цифровой форме.</span>
+                </h1>
 
-                <div class="contact-row">
+                <p class="hero-description">
+                    Лаборатория геоинформационных технологий и фотограмметрии
+                    занимается сбором, обработкой и пространственным анализом
+                    данных с использованием БПЛА, геодезического оборудования,
+                    спутниковых снимков и ГИС.
+                </p>
 
-                    <div class="contact-label">
-                        Телефон
-                    </div>
+                <div class="hero-actions">
+                    <a href="#contacts" class="btn btn-primary">
+                        Обсудить задачу
+                    </a>
 
-                    <div class="contact-value">
-
-                        <a href="tel:+79125937922">
-                            +7 912 593-79-22
-                        </a>
-
-                    </div>
-
+                    <a href="#services" class="btn btn-secondary">
+                        Направления работ
+                    </a>
                 </div>
 
-
-                <div class="contact-row">
-
-                    <div class="contact-label">
-                        Электронная почта
-                    </div>
-
-                    <div class="contact-value">
-
-                        <a href="mailto:89125937911@mail.ru">
-                            89125937911@mail.ru
-                        </a>
-
-                    </div>
-
+                <div class="hero-note">
+                    Пермь · работа по России
                 </div>
 
+            </div>
 
-                <div class="contact-row">
 
-                    <div class="contact-label">
-                        Регион работы
-                    </div>
+            <div class="hero-visual reveal">
 
-                    <div class="contact-value">
-                        Пермь · Пермский край · Россия
+                <div class="map-card">
+
+                    <div class="map-point point-1"></div>
+                    <div class="map-point point-2"></div>
+                    <div class="map-point point-3"></div>
+
+                    <div class="visual-label">
+                        <div>
+                            <strong>SPATIAL DATA</strong><br>
+                            GIS / UAV / RS
+                        </div>
+
+                        <div>
+                            3D · 2D · RASTER
+                        </div>
                     </div>
 
                 </div>
 
             </div>
 
-
-            <div class="requisites reveal">
-
-                <div class="requisites-title">
-                    Реквизиты ИП
-                </div>
+        </div>
+    </section>
 
 
-                <div class="req-row">
+    <!-- SERVICES -->
 
-                    <span>
-                        Наименование
-                    </span>
+    <section id="services">
 
-                    <span>
-                        ИП Шилоносов Леонид Андреевич
-                    </span>
+        <div class="container">
 
-                </div>
+            <div class="section-head reveal">
+                <div class="section-number">01 — УСЛУГИ</div>
 
+                <h2 class="section-title">
+                    Работаем с пространственными данными
+                    от полевых измерений до готовой аналитики.
+                </h2>
 
-                <div class="req-row">
-
-                    <span>
-                        ИНН
-                    </span>
-
-                    <span>
-                        590310799867
-                    </span>
-
-                </div>
+                <p class="section-description">
+                    Подбираем технологию под задачу: БПЛА-съёмка,
+                    геодезия, фотограмметрия, ГИС-анализ,
+                    дистанционное зондирование и обследование территорий.
+                </p>
+            </div>
 
 
-                <div class="req-row">
+            <div class="services-grid">
 
-                    <span>
-                        ОГРНИП
-                    </span>
+                <article class="service reveal">
+                    <div class="service-index">01 / 06</div>
+                    <h3>Дендрология</h3>
+                    <p>
+                        Дендрологические обследования, таксация,
+                        оценка состояния зеленых насаждений,
+                        картирование деревьев и подготовка материалов.
+                    </p>
+                    <div class="service-tag">GREEN INFRASTRUCTURE</div>
+                </article>
 
-                    <span>
-                        326595800115619
-                    </span>
 
-                </div>
+                <article class="service reveal">
+                    <div class="service-index">02 / 06</div>
+                    <h3>БПЛА и аэрофотосъёмка</h3>
+                    <p>
+                        Съёмка территорий с БПЛА, получение
+                        высокодетальных ортофотопланов,
+                        цифровых моделей и исходных фотоматериалов.
+                    </p>
+                    <div class="service-tag">UAV / AERIAL</div>
+                </article>
 
 
-                <div class="req-row">
+                <article class="service reveal">
+                    <div class="service-index">03 / 06</div>
+                    <h3>Фотограмметрия</h3>
+                    <p>
+                        Фотограмметрическая обработка,
+                        построение 3D-моделей, плотных облаков точек,
+                        ЦМР, ЦММ и ортофотопланов.
+                    </p>
+                    <div class="service-tag">3D / ORTHO</div>
+                </article>
 
-                    <span>
-                        Место деятельности
-                    </span>
 
-                    <span>
-                        г. Пермь
-                    </span>
+                <article class="service reveal">
+                    <div class="service-index">04 / 06</div>
+                    <h3>Геодезия и картография</h3>
+                    <p>
+                        Геодезические измерения, топографическая съёмка,
+                        цифровые топографические планы,
+                        картографические материалы и базы данных.
+                    </p>
+                    <div class="service-tag">SURVEYING</div>
+                </article>
 
-                </div>
 
+                <article class="service reveal">
+                    <div class="service-index">05 / 06</div>
+                    <h3>ГИС и пространственный анализ</h3>
+                    <p>
+                        Создание ГИС, геобазы данных, тематическое
+                        картирование, пространственный анализ и
+                        автоматизация обработки данных.
+                    </p>
+                    <div class="service-tag">GIS / POSTGIS</div>
+                </article>
+
+
+                <article class="service reveal">
+                    <div class="service-index">06 / 06</div>
+                    <h3>ДЗЗ и мониторинг</h3>
+                    <p>
+                        Работа со спутниковыми и мультиспектральными
+                        данными, вегетационные индексы, мониторинг
+                        природных объектов и изменение территорий.
+                    </p>
+                    <div class="service-tag">REMOTE SENSING</div>
+                </article>
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
 
+    <!-- DATA BAND -->
+
+    <section>
+        <div class="container">
+
+            <div class="data-band reveal">
+
+                <div class="data-item">
+                    <div class="data-value">GIS</div>
+                    <div class="data-label">Геоинформационные системы</div>
+                </div>
+
+                <div class="data-item">
+                    <div class="data-value">UAV</div>
+                    <div class="data-label">Беспилотная аэрофотосъёмка</div>
+                </div>
+
+                <div class="data-item">
+                    <div class="data-value">3D</div>
+                    <div class="data-label">Фотограмметрическое моделирование</div>
+                </div>
+
+                <div class="data-item">
+                    <div class="data-value">RS</div>
+                    <div class="data-label">Дистанционное зондирование</div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <div class="section-head reveal">
+                <div class="section-number">02 — О ЛАБОРАТОРИИ</div>
+
+                <h2 class="section-title">
+                    География, данные и технологии
+                    в одной рабочей системе.
+                </h2>
+            </div>
+
+
+            <div class="about-grid">
+
+                <div class="about-card reveal">
+
+                    <div class="about-card-title">
+                        Руководитель
+                    </div>
+
+                    <h3>
+                        Шилоносов<br>
+                        Леонид Андреевич
+                    </h3>
+
+                    <p style="color:var(--muted);font-size:13px;">
+                        Инженер-картограф · специалист по ГИС,
+                        фотограмметрии, геодезии и пространственному анализу
+                    </p>
+
+                    <div class="about-list">
+                        <div>Геоинформационные технологии</div>
+                        <div>БПЛА и фотограмметрия</div>
+                        <div>Картография и геодезия</div>
+                        <div>ДЗЗ и мониторинг территорий</div>
+                    </div>
+
+                </div>
+
+
+                <div class="about-copy reveal">
+
+                    <p>
+                        Лаборатория объединяет полевые методы получения
+                        пространственной информации и цифровые технологии
+                        её последующей обработки.
+                    </p>
+
+                    <p>
+                        В работе используются данные БПЛА, GNSS,
+                        спутниковой съёмки и наземных измерений.
+                        Полученные материалы преобразуются в
+                        картографические продукты, цифровые модели,
+                        базы пространственных данных и аналитические
+                        материалы.
+                    </p>
+
+                    <p>
+                        Основной принцип — не просто получить снимки,
+                        а превратить исходные данные в инструмент,
+                        пригодный для проектирования, мониторинга,
+                        обследования и принятия решений.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DIRECTIONS -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-head reveal">
+                <div class="section-number">03 — НАПРАВЛЕНИЯ</div>
+
+                <h2 class="section-title">
+                    От физического объекта
+                    до цифровой модели территории.
+                </h2>
+            </div>
+
+
+            <div class="direction-grid">
+
+                <div class="direction reveal">
+                    <div class="direction-num">A / 01</div>
+                    <div>
+                        <h3>Территориальные обследования</h3>
+                        <p>
+                            Сбор пространственной информации
+                            и обследование объектов непосредственно
+                            на территории.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="direction reveal">
+                    <div class="direction-num">A / 02</div>
+                    <div>
+                        <h3>Ортофотопланы и ЦМР</h3>
+                        <p>
+                            Получение высокоточных ортофотопланов,
+                            цифровых моделей рельефа и поверхности.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="direction reveal">
+                    <div class="direction-num">A / 03</div>
+                    <div>
+                        <h3>Природные территории</h3>
+                        <p>
+                            Леса, ООПТ, зеленые насаждения,
+                            экологический мониторинг и пространственная аналитика.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="direction reveal">
+                    <div class="direction-num">A / 04</div>
+                    <div>
+                        <h3>Геоданные для проектов</h3>
+                        <p>
+                            Подготовка пространственной основы
+                            для строительства, обследований,
+                            лесного хозяйства и инженерных задач.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <div class="container">
+
+            <div class="section-head reveal">
+                <div class="section-number">04 — ПРОЕКТЫ</div>
+
+                <h2 class="section-title">
+                    Практические задачи,
+                    решаемые пространственными данными.
+                </h2>
+            </div>
+
+
+            <div class="work-grid">
+
+                <div class="work-card reveal">
+                    <div class="work-type">UAV / PHOTOGRAMMETRY</div>
+
+                    <h3>
+                        Беспилотная аэрофотосъёмка
+                        и создание бесшовных ортофотопланов
+                    </h3>
+
+                    <p>
+                        Планирование полётов · сбор данных ·
+                        фотограмметрическая обработка ·
+                        контроль качества · картографический материал
+                    </p>
+                </div>
+
+
+                <div class="work-card small reveal">
+                    <div class="work-type">FORESTRY / GIS</div>
+
+                    <h3>
+                        Лесные и дендрологические обследования
+                    </h3>
+
+                    <p>
+                        Полевые данные · пространственная база ·
+                        картирование · аналитика
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TECHNOLOGY -->
+
+    <section id="technology">
+
+        <div class="container">
+
+            <div class="section-head reveal">
+
+                <div class="section-number">05 — ТЕХНОЛОГИИ</div>
+
+                <h2 class="section-title">
+                    Инструменты, которыми обрабатываются данные.
+                </h2>
+
+                <p class="section-description">
+                    Используем современный стек геоинформационного
+                    и фотограмметрического ПО в зависимости от задачи.
+                </p>
+
+            </div>
+
+
+            <div class="stack-grid reveal">
+
+                <div class="stack-item">QGIS</div>
+                <div class="stack-item">PostGIS</div>
+                <div class="stack-item">PostgreSQL</div>
+                <div class="stack-item">GDAL</div>
+                <div class="stack-item">Orfeo ToolBox</div>
+                <div class="stack-item">SAGA GIS</div>
+                <div class="stack-item">Agisoft Metashape</div>
+                <div class="stack-item">Python</div>
+                <div class="stack-item">GeoServer</div>
+                <div class="stack-item">WebGIS</div>
+                <div class="stack-item">GNSS</div>
+                <div class="stack-item">UAV</div>
+                <div class="stack-item">Sentinel-2</div>
+                <div class="stack-item">Landsat</div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-head reveal">
+
+                <div class="section-number">06 — ПРОЦЕСС</div>
+
+                <h2 class="section-title">
+                    От задачи до готового результата.
+                </h2>
+
+            </div>
+
+
+            <div class="process-grid">
+
+                <div class="process reveal">
+                    <div class="process-num">01</div>
+                    <h3>Задача</h3>
+                    <p>
+                        Определяем требуемый результат,
+                        территорию и исходные данные.
+                    </p>
+                </div>
+
+
+                <div class="process reveal">
+                    <div class="process-num">02</div>
+                    <h3>Сбор данных</h3>
+                    <p>
+                        Полевые измерения, БПЛА,
+                        спутниковые или имеющиеся данные.
+                    </p>
+                </div>
+
+
+                <div class="process reveal">
+                    <div class="process-num">03</div>
+                    <h3>Обработка</h3>
+                    <p>
+                        Фотограмметрия, ГИС-анализ,
+                        построение моделей и карт.
+                    </p>
+                </div>
+
+
+                <div class="process reveal">
+                    <div class="process-num">04</div>
+                    <h3>Результат</h3>
+                    <p>
+                        Передача готовых материалов
+                        в согласованном формате.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-head reveal">
+                <div class="section-number">07 — FAQ</div>
+
+                <h2 class="section-title">
+                    Частые вопросы
+                </h2>
+            </div>
+
+
+            <div class="faq">
+
+                <details class="reveal">
+                    <summary>
+                        Можно ли заказать только обработку уже имеющихся снимков?
+                    </summary>
+
+                    <p>
+                        Да. Можно передать готовые фотографии,
+                        спутниковые данные, ортофотоматериалы или
+                        иные исходные данные для последующей обработки.
+                    </p>
+                </details>
+
+
+                <details class="reveal">
+                    <summary>
+                        Выполняется ли работа за пределами Пермского края?
+                    </summary>
+
+                    <p>
+                        Да. Конкретная возможность выезда зависит
+                        от территории, характера работ и требуемого
+                        объёма полевого этапа.
+                    </p>
+                </details>
+
+
+                <details class="reveal">
+                    <summary>
+                        Можно ли сделать не только карту, но и ГИС?
+                    </summary>
+
+                    <p>
+                        Да. Возможно создание структурированной
+                        пространственной базы данных, тематических
+                        слоёв, проектов QGIS и WebGIS-решений.
+                    </p>
+                </details>
+
+
+                <details class="reveal">
+                    <summary>
+                        Какие данные можно использовать?
+                    </summary>
+
+                    <p>
+                        БПЛА-фотосъёмка, мультиспектральные данные,
+                        спутниковые изображения, GNSS-измерения,
+                        наземные обследования и существующие геоданные.
+                    </p>
+                </details>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contacts">
+
+        <div class="container">
+
+            <div class="contact-box reveal">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Обсудим задачу
+                    </div>
+
+                    <h2>
+                        Расскажите,
+                        что необходимо получить.
+                    </h2>
+
+                    <p>
+                        Опишите территорию, объект и желаемый результат.
+                        После этого можно определить оптимальную технологию
+                        и состав работ.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-links">
+
+                    <a class="contact-link"
+                       href="mailto:89125937911@mail.ru">
+
+                        <span>Email</span>
+
+                        89125937911@mail.ru
+
+                    </a>
+
+
+                    <a class="contact-link"
+                       href="tel:+79125937922">
+
+                        <span>Телефон</span>
+
+                        +7 912 593-79-22
+
+                    </a>
+
+
+                    <div class="contact-link">
+
+                        <span>География</span>
+
+                        Пермь · работа по России
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
-<footer class="footer">
+<footer>
 
-    <div class="container footer-inner">
+    <div class="container">
 
-        <div>
-            © 2026 ИП Шилоносов Леонид Андреевич
+        <div class="footer-main">
+
+            <div>
+
+                <div class="footer-name">
+                    Лаборатория геоинформационных технологий
+                    и фотограмметрии
+                </div>
+
+                <div class="footer-sub">
+                    Геоинформационные технологии · Фотограмметрия ·
+                    БПЛА · ДЗЗ · Геодезия
+                </div>
+
+            </div>
+
+
+            <div class="footer-legal">
+
+                <strong style="color:#9baeb2;">
+                    ИП Шилоносов Леонид Андреевич
+                </strong>
+
+                <br>
+
+                г. Пермь
+
+            </div>
+
         </div>
 
-        <div>
-            GIS · UAV · GEO · DENDROLOGY
+
+        <div class="footer-bottom">
+
+            <div>
+                © <span id="year"></span>
+                Лаборатория геоинформационных технологий и фотограмметрии
+            </div>
+
+            <div>
+                Пространственные данные · инженерные решения
+            </div>
+
         </div>
 
     </div>
@@ -2253,85 +1748,84 @@ section {
 
 <script>
 
-/* =========================
-   HEADER
-========================= */
+    /* ================= HEADER ================= */
 
-const header = document.getElementById("header");
+    const header = document.getElementById("header");
 
-window.addEventListener("scroll", () => {
+    window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 30) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
-    }
-
-});
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-const menuButton = document.getElementById("menuButton");
-const mobileMenu = document.getElementById("mobileMenu");
-
-menuButton.addEventListener("click", () => {
-
-    mobileMenu.classList.toggle("open");
-    document.body.classList.toggle("menu-open");
-
-});
-
-
-document.querySelectorAll(".mobile-menu a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        mobileMenu.classList.remove("open");
-        document.body.classList.remove("menu-open");
+        if (window.scrollY > 40) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
 
     });
 
-});
+
+    /* ================= MOBILE MENU ================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+
+        navLinks.classList.toggle("active");
+        document.body.classList.toggle("menu-open");
+
+    });
 
 
-/* =========================
-   SCROLL ANIMATIONS
-========================= */
+    document.querySelectorAll(".nav-links a").forEach(link => {
 
-const observer = new IntersectionObserver(
+        link.addEventListener("click", () => {
 
-    entries => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("visible");
-
-                observer.unobserve(entry.target);
-
-            }
+            navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
 
         });
 
-    },
-
-    {
-        threshold: .12
-    }
-
-);
+    });
 
 
-document.querySelectorAll(".reveal").forEach(element => {
+    /* ================= REVEAL ANIMATION ================= */
 
-    observer.observe(element);
+    const observer = new IntersectionObserver(
 
-});
+        entries => {
 
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+    document.querySelectorAll(".reveal").forEach(el => {
+
+        observer.observe(el);
+
+    });
+
+
+    /* ================= YEAR ================= */
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
 
 </script>
 
